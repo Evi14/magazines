@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscriptions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <!-- vendos emrin e kolones qe do si ajo ne db -->
+    <!-- <h1>Welcome {{loggedUser.first_name}} {{loggedUser.last_name}}</h1> -->
+    <!-- <a class="btn btn-danger" href="/logout">Logout</a> -->
+    <div class="d-flex justify-content-between p-3 align-items-center">
+        <h1>Welcome {{loggedUser.first_name}} {{loggedUser.last_name}}</h1>
+        <!-- <h1>Welcome  <span class="text-success">{{loggedUser.email}}</span></h1> -->
+        <div>
+            <a class="mx-3" href="/addMagazine">Add Magazine</a>
+            <a class="mx-3" href="/account">Account</a>
+            <a class="btn btn-danger" href="/logout">Logout</a>
+        </div>
+    </div>
+
+    </div>
+    <div class="row p-3">
+        <div class="col-6">
+            <h3 class="mt-4">Magazines</h3>
+            <div class=" border border-1 border-dark">
+            {% for magazine in allMagazines %}
+            <div class="d-flex mb-3 pt-3 ">
+                <p class=""><a href="/show_magazine/{{magazine.id}}">{{magazine.title}}</a> added by {{magazine.first_name}} {{magazine.last_name}}
+                    <!-- {{magazine.user_id}} -->
+                </p>
+                <div class="d-flex">
+                    {% if magazine.id not in userLikedMagazines %}
+                    <a class="mx-2" href="/favorite/{{magazine.id}}">Subscribe</a>
+                    {% endif %}
+                    {% if magazine.id in userLikedMagazines %}
+                    <a class="mx-2" href="/unfavorite/{{magazine.id}}">Unsubscribe</a>
+                    {% endif %}
+                    <!-- {% if magazine.user_id == loggedUser.id  %}
+                        <a class="btn btn-danger mx-2" href="/delete/{{magazine.id}}">Delete</a>
+                        {% endif %} -->
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+</body>
+
+</html>

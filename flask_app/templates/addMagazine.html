@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscriptions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+
+<body>
+    
+        <div class="d-flex justify-content-between p-3 align-items-center">
+            <h1>Add Magazine</h1>
+            <div>
+                <a class="mx-3" href="/dashboard">Dashboard</a>
+                <!-- <a class="btn btn-primary" href="/account">Account</a> -->
+                <a class="btn btn-danger" href="/logout">Logout</a>
+            </div>
+        </div>
+        <div class="col-8 d-flex m-auto justify-content-center p-5">
+            <!-- Add magazin -->
+            <div class="form-body">
+                <div class="row justify-content-center">
+                    <div class="form-holder">
+                        <div class="form-content">
+                            <div class="form-items">
+                                <h3>Add a Magazine</h3>
+                                <form action="/newMagazine" method="post">
+                                    <input type="hidden" name="id" value={{loggedUser.id}}>
+                                    <div class="col-md-12 mt-3">
+                                        <label for="title">Title:</label>
+                                        <input class="form-control" type="text" name="title" required>
+                                        <div>
+                                            {% with messages = get_flashed_messages(category_filter=["title"]) %}
+                                            <!-- declare a variable called messages -->
+                                            {% if messages %}
+                                            <!-- check if there are any messages -->
+                                            {% for message in messages %}
+                                            <!-- loop through the messages -->
+                                            <p class="text-warning">{{message}}</p>
+                                            <!-- display each message in a paragraph tag -->
+                                            {% endfor %}
+                                            {% endif %}
+                                            {% endwith %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <label for="description">Description</label>
+                                        <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+                                        <div>
+                                            {% with messages = get_flashed_messages(category_filter=["description"]) %}
+                                            <!-- declare a variable called messages -->
+                                            {% if messages %}
+                                            <!-- check if there are any messages -->
+                                            {% for message in messages %}
+                                            <!-- loop through the messages -->
+                                            <p class="text-warning">{{message}}</p>
+                                            <!-- display each message in a paragraph tag -->
+                                            {% endfor %}
+                                            {% endif %}
+                                            {% endwith %}
+                                        </div>
+                                    </div>
+                                    <div class="form-button mt-3">
+                                        <button id="submit" type="submit" class="btn btn-success">Add Magazine</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
